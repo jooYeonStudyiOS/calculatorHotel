@@ -22,6 +22,10 @@ class Calculator {
     func dividedOperation() -> Double {
         return firstNumber / secondNumber
     }
+    
+    func truncatingRemainderOperation() -> Double {
+        return firstNumber.truncatingRemainder(dividingBy: secondNumber)
+    }
 }
 
 let calculator = Calculator(firstNumber: 3, secondNumber: 7)
@@ -32,10 +36,13 @@ let plusResult = calculator.plusOperation()
 print("\(firstNumber) + \(secondNumber) = \(plusResult)")
 
 let minusResult = calculator.minusOperation()
-print("\(firstNumber) / \(secondNumber) = \(minusResult)")
+print("\(firstNumber) - \(secondNumber) = \(minusResult)")
 
 let multiplyResult = calculator.multiplyOperation()
 print("\(firstNumber) * \(secondNumber) = \(multiplyResult)")
 
 let divideResult = calculator.dividedOperation()
 print("\(firstNumber) / \(secondNumber) = \(divideResult)")
+
+let remainderResult = calculator.truncatingRemainderOperation()
+print("\(firstNumber) % \(secondNumber) = \(remainderResult)")
