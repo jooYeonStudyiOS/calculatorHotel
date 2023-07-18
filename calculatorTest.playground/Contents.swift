@@ -1,25 +1,25 @@
 class Calculator {
-    let firstNumber: Int
-    let secondNumber: Int
+    let firstNumber: Double
+    let secondNumber: Double
     
-    init(firstNumber: Int, secondNumber: Int) {
+    init(firstNumber: Double, secondNumber: Double) {
         self.firstNumber = firstNumber
         self.secondNumber = secondNumber
     }
     
-    func plusOperation() -> Int {
+    func plusOperation() -> Double {
         return firstNumber + secondNumber
     }
     
-    func minusOperation() -> Int {
+    func minusOperation() -> Double {
         return firstNumber - secondNumber
     }
     
-    func multiplyOperation() -> Int {
+    func multiplyOperation() -> Double {
         return firstNumber * secondNumber
     }
     
-    func dividedOperation() -> Int {
+    func dividedOperation() -> Double {
         return firstNumber / secondNumber
     }
 }
