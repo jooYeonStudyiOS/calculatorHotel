@@ -1,8 +1,5 @@
 enum Operation {
-    case add
-    case substract
-    case multiply
-    case divide
+    case add, substract, multiply, divide
 }
 
 class AddOperation {
