@@ -54,17 +54,14 @@ class Calculator {
     }
  }
 
-//let plusResult = calculator.plusOperation()
-//print("\(firstNumber) + \(secondNumber) = \(plusResult)")
-//
-//let minusResult = calculator.minusOperation()
-//print("\(firstNumber) - \(secondNumber) = \(minusResult)")
-//
-//let multiplyResult = calculator.multiplyOperation()
-//print("\(firstNumber) * \(secondNumber) = \(multiplyResult)")
-//
-//let divideResult = calculator.dividedOperation()
-//print("\(firstNumber) / \(secondNumber) = \(divideResult)")
-//
-//let remainderResult = calculator.truncatingRemainderOperation()
-//print("\(firstNumber) % \(secondNumber) = \(remainderResult)")
+let addResult = Calculator(operation: .add, firstNumber: 7, secondNumber: 3).result()
+print("덧셈 결과 \(addResult)")
+
+let substractResult = Calculator(operation: .substract, firstNumber: 7, secondNumber: 3).result()
+print("뺄셈 결과 \(substractResult)")
+
+let multiplyResult = Calculator(operation: .multiply, firstNumber: 7, secondNumber: 3).result()
+print("곱셈 결과 \(multiplyResult)")
+
+let divideResult = Calculator(operation: .divide, firstNumber: 7, secondNumber: 3).result()
+print("나눗셈 결과 \(divideResult)")
