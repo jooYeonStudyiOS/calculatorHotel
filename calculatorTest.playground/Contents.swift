@@ -36,7 +36,7 @@ class DivideOperation: AbstractOperation {
 //2. 연산한 결과 출력하기
 
 class Calculator {
-    let operation: AbstractOperation
+    var operation: AbstractOperation
     
     init(operation: AbstractOperation) {
         self.operation = operation
@@ -45,22 +45,25 @@ class Calculator {
     func showResult(firstNumber: Double, secondNumber: Double) {
         print(operation.result(firstNumber: firstNumber, secondNumber: secondNumber))
     }
+    
+    func changeOperation(newOperation: AbstractOperation){
+        operation = newOperation
+    }
  }
 
 
-let addOperation = AddOperation()
-let substractOperation = SubstractOperation()
-let multiplyOperation = MultiplyOperation()
-let divideOperation = DivideOperation()
+let calculator = Calculator(operation: AbstractOperation())
 
-let calculator1 = Calculator(operation: addOperation)
-calculator1.showResult(firstNumber: 3, secondNumber: 7)
+calculator.changeOperation(newOperation: AddOperation())
+calculator.showResult(firstNumber: 3, secondNumber: 7)
 
-let calculator2 = Calculator(operation: substractOperation)
-calculator2.showResult(firstNumber: 3, secondNumber: 7)
 
-let calculator3 = Calculator(operation: multiplyOperation)
-calculator3.showResult(firstNumber: 3, secondNumber: 7)
+calculator.changeOperation(newOperation: SubstractOperation())
+calculator.showResult(firstNumber: 3, secondNumber: 7)
 
-let calculator4 = Calculator(operation: divideOperation)
-calculator4.showResult(firstNumber: 3, secondNumber: 7)
+
+calculator.changeOperation(newOperation: MultiplyOperation())
+calculator.showResult(firstNumber: 7, secondNumber: 5)
+
+calculator.changeOperation(newOperation: DivideOperation())
+calculator.showResult(firstNumber: 7, secondNumber: 7)
