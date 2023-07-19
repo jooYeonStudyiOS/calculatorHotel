@@ -32,16 +32,14 @@ class DivideOperation {
 class Calculator {
     let firstNumber: Double
     let secondNumber: Double
+    let operation: Operation
     
-    init(firstNumber: Double, secondNumber: Double) {
+    init(operation: Operation, firstNumber: Double, secondNumber: Double) {
+        self.operation = operation
         self.firstNumber = firstNumber
         self.secondNumber = secondNumber
     }
 }
-
-let calculator = Calculator(firstNumber: 3, secondNumber: 7)
-let firstNumber = calculator.firstNumber
-let secondNumber = calculator.secondNumber
 
 //let plusResult = calculator.plusOperation()
 //print("\(firstNumber) + \(secondNumber) = \(plusResult)")
