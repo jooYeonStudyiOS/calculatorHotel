@@ -21,13 +21,13 @@ class SubstractOperation: AbstractOperation {
 
 class MultiplyOperation: AbstractOperation {
     override func result(firstNumber: Double, secondNumber: Double)  -> Double {
-        return firstNumber - secondNumber
+        return firstNumber * secondNumber
     }
 }
 
 class DivideOperation: AbstractOperation {
     override func result(firstNumber: Double, secondNumber: Double)  -> Double {
-        return firstNumber - secondNumber
+        return firstNumber / secondNumber
     }
 }
 
