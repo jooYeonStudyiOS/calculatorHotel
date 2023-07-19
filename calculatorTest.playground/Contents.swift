@@ -79,12 +79,22 @@ class Calculator {
     func showResult(firstNumber: Double, secondNumber: Double) {
         let result = operation.result(firstNumber: firstNumber, secondNumber: secondNumber)
         let operation = operation.operation
-
-        print("\(firstNumber) \(operation) \(secondNumber) = \(result)")
+        
+        // 과제와는 크게 상관 없는..
+        // .0 을 표시하느냐 하지 않느냐 변환하기
+        let firstNumberToString: String = changeToString(number: firstNumber)
+        let secondNumberToString: String = changeToString(number: secondNumber)
+        let resultToString: String = changeToString(number: result)
+        
+        print("\(firstNumberToString) \(operation) \(secondNumberToString) = \(resultToString)")
     }
     
     func changeOperation(newOperation: AbstractOperation){
         operation = newOperation
+    }
+    
+    func changeToString(number: Double) -> String {
+        return number.truncatingRemainder(dividingBy: 1) == 0 ? String(Int(number)) : String(number)
     }
  }
 
@@ -92,15 +102,13 @@ class Calculator {
 let calculator = Calculator(operation: AbstractOperation())
 
 calculator.changeOperation(newOperation: AddOperation())
-calculator.showResult(firstNumber: 3, secondNumber: 7)
-
+calculator.showResult(firstNumber: 3.2, secondNumber: 7)
 
 calculator.changeOperation(newOperation: SubstractOperation())
 calculator.showResult(firstNumber: 3, secondNumber: 7)
-
 
 calculator.changeOperation(newOperation: MultiplyOperation())
 calculator.showResult(firstNumber: 7, secondNumber: 5)
 
 calculator.changeOperation(newOperation: DivideOperation())
-calculator.showResult(firstNumber: 7, secondNumber: 7)
+calculator.showResult(firstNumber: 10, secondNumber: 4)
