@@ -2,30 +2,64 @@
 //각 숫자들을 연산하기
 
 class AbstractOperation {
+    var operation: String = "초기"
+    
     func result(firstNumber: Double, secondNumber: Double) -> Double {
         return 0.0
     }
 }
 
 class AddOperation: AbstractOperation {
+    override var operation: String {
+        get {
+            return "+"
+        }
+        set {
+        }
+    }
+    
     override func result(firstNumber: Double, secondNumber: Double)  -> Double {
         return firstNumber + secondNumber
     }
 }
 
 class SubstractOperation: AbstractOperation {
+    override var operation: String {
+        get {
+            return "-"
+        }
+        set {
+        }
+    }
+    
     override func result(firstNumber: Double, secondNumber: Double)  -> Double {
         return firstNumber - secondNumber
     }
 }
 
 class MultiplyOperation: AbstractOperation {
+    override var operation: String {
+        get {
+            return "*"
+        }
+        set {
+        }
+    }
+    
     override func result(firstNumber: Double, secondNumber: Double)  -> Double {
         return firstNumber * secondNumber
     }
 }
 
 class DivideOperation: AbstractOperation {
+    override var operation: String {
+        get {
+            return "/"
+        }
+        set {
+        }
+    }
+    
     override func result(firstNumber: Double, secondNumber: Double)  -> Double {
         return firstNumber / secondNumber
     }
@@ -43,7 +77,10 @@ class Calculator {
     }
     
     func showResult(firstNumber: Double, secondNumber: Double) {
-        print(operation.result(firstNumber: firstNumber, secondNumber: secondNumber))
+        let result = operation.result(firstNumber: firstNumber, secondNumber: secondNumber)
+        let operation = operation.operation
+
+        print("\(firstNumber) \(operation) \(secondNumber) = \(result)")
     }
     
     func changeOperation(newOperation: AbstractOperation){
