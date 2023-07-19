@@ -1,67 +1,114 @@
-enum Operation {
-    case add
-    case substract
-    case multiply
-    case divide
+//연산 클래스에서 하는 일
+//각 숫자들을 연산하기
+
+class AbstractOperation {
+    var operation: String = "초기"
+    
+    func result(firstNumber: Double, secondNumber: Double) -> Double {
+        return 0.0
+    }
 }
 
-class AddOperation {
-    func result(firstNumber: Double, secondNumber: Double) -> Double {
+class AddOperation: AbstractOperation {
+    override var operation: String {
+        get {
+            return "+"
+        }
+        set {
+        }
+    }
+    
+    override func result(firstNumber: Double, secondNumber: Double)  -> Double {
         return firstNumber + secondNumber
     }
 }
 
-class SubstractOperation {
-    func result(firstNumber: Double, secondNumber: Double) -> Double {
+class SubstractOperation: AbstractOperation {
+    override var operation: String {
+        get {
+            return "-"
+        }
+        set {
+        }
+    }
+    
+    override func result(firstNumber: Double, secondNumber: Double)  -> Double {
         return firstNumber - secondNumber
     }
 }
 
-class MultiplyOperation {
-    func result(firstNumber: Double, secondNumber: Double) -> Double {
+class MultiplyOperation: AbstractOperation {
+    override var operation: String {
+        get {
+            return "*"
+        }
+        set {
+        }
+    }
+    
+    override func result(firstNumber: Double, secondNumber: Double)  -> Double {
         return firstNumber * secondNumber
     }
 }
 
-class DivideOperation {
-    func result(firstNumber: Double, secondNumber: Double) -> Double {
+class DivideOperation: AbstractOperation {
+    override var operation: String {
+        get {
+            return "/"
+        }
+        set {
+        }
+    }
+    
+    override func result(firstNumber: Double, secondNumber: Double)  -> Double {
         return firstNumber / secondNumber
     }
 }
 
+//계산기가 하는 일
+//1. 숫자와 연산자 입력 받기
+//2. 연산한 결과 출력하기
+
 class Calculator {
-    let firstNumber: Double
-    let secondNumber: Double
-    let operation: Operation
+    var operation: AbstractOperation
     
-    init(operation: Operation, firstNumber: Double, secondNumber: Double) {
+    init(operation: AbstractOperation) {
         self.operation = operation
-        self.firstNumber = firstNumber
-        self.secondNumber = secondNumber
     }
     
-    func result() -> Double {
-        var result: Double = 0.0
+    func showResult(firstNumber: Double, secondNumber: Double) {
+        let result = operation.result(firstNumber: firstNumber, secondNumber: secondNumber)
+        let operation = operation.operation
         
-        switch operation {
-        case .add : result = AddOperation().result(firstNumber: firstNumber, secondNumber: secondNumber)
-        case .substract : result = SubstractOperation().result(firstNumber: firstNumber, secondNumber: secondNumber)
-        case .multiply : result = MultiplyOperation().result(firstNumber: firstNumber, secondNumber: secondNumber)
-        case .divide : result = DivideOperation().result(firstNumber: firstNumber, secondNumber: secondNumber)
-        }
+        // 과제와는 크게 상관 없는..
+        // .0 을 표시하느냐 하지 않느냐 변환하기
+        let firstNumberToString: String = changeToString(number: firstNumber)
+        let secondNumberToString: String = changeToString(number: secondNumber)
+        let resultToString: String = changeToString(number: result)
         
-        return result
+        print("\(firstNumberToString) \(operation) \(secondNumberToString) = \(resultToString)")
+    }
+    
+    func changeOperation(newOperation: AbstractOperation){
+        operation = newOperation
+    }
+    
+    func changeToString(number: Double) -> String {
+        return number.truncatingRemainder(dividingBy: 1) == 0 ? String(Int(number)) : String(number)
     }
  }
 
-let addResult = Calculator(operation: .add, firstNumber: 7, secondNumber: 3).result()
-print("덧셈 결과 \(addResult)")
 
-let substractResult = Calculator(operation: .substract, firstNumber: 7, secondNumber: 3).result()
-print("뺄셈 결과 \(substractResult)")
+let calculator = Calculator(operation: AbstractOperation())
 
-let multiplyResult = Calculator(operation: .multiply, firstNumber: 7, secondNumber: 3).result()
-print("곱셈 결과 \(multiplyResult)")
+calculator.changeOperation(newOperation: AddOperation())
+calculator.showResult(firstNumber: 3.2, secondNumber: 7)
 
-let divideResult = Calculator(operation: .divide, firstNumber: 7, secondNumber: 3).result()
-print("나눗셈 결과 \(divideResult)")
+calculator.changeOperation(newOperation: SubstractOperation())
+calculator.showResult(firstNumber: 3, secondNumber: 7)
+
+calculator.changeOperation(newOperation: MultiplyOperation())
+calculator.showResult(firstNumber: 7, secondNumber: 5)
+
+calculator.changeOperation(newOperation: DivideOperation())
+calculator.showResult(firstNumber: 10, secondNumber: 4)
