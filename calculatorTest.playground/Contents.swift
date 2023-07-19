@@ -1,3 +1,10 @@
+enum Operation {
+    case add
+    case substract
+    case multiply
+    case divide
+}
+
 class Calculator {
     let firstNumber: Double
     let secondNumber: Double
