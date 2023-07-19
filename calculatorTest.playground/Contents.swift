@@ -1,41 +1,67 @@
-class Calculator {
-    let firstNumber: Int
-    let secondNumber: Int
-    
-    init(firstNumber: Int, secondNumber: Int) {
-        self.firstNumber = firstNumber
-        self.secondNumber = secondNumber
-    }
-    
-    func plusOperation() -> Int {
+enum Operation {
+    case add
+    case substract
+    case multiply
+    case divide
+}
+
+class AddOperation {
+    func result(firstNumber: Double, secondNumber: Double) -> Double {
         return firstNumber + secondNumber
     }
-    
-    func minusOperation() -> Int {
+}
+
+class SubstractOperation {
+    func result(firstNumber: Double, secondNumber: Double) -> Double {
         return firstNumber - secondNumber
     }
-    
-    func multiplyOperation() -> Int {
+}
+
+class MultiplyOperation {
+    func result(firstNumber: Double, secondNumber: Double) -> Double {
         return firstNumber * secondNumber
     }
-    
-    func dividedOperation() -> Int {
+}
+
+class DivideOperation {
+    func result(firstNumber: Double, secondNumber: Double) -> Double {
         return firstNumber / secondNumber
     }
 }
 
-let calculator = Calculator(firstNumber: 3, secondNumber: 7)
-let firstNumber = calculator.firstNumber
-let secondNumber = calculator.secondNumber
+class Calculator {
+    let firstNumber: Double
+    let secondNumber: Double
+    let operation: Operation
+    
+    init(operation: Operation, firstNumber: Double, secondNumber: Double) {
+        self.operation = operation
+        self.firstNumber = firstNumber
+        self.secondNumber = secondNumber
+    }
+    
+    func result() -> Double {
+        var result: Double = 0.0
+        
+        switch operation {
+        case .add : result = AddOperation().result(firstNumber: firstNumber, secondNumber: secondNumber)
+        case .substract : result = SubstractOperation().result(firstNumber: firstNumber, secondNumber: secondNumber)
+        case .multiply : result = MultiplyOperation().result(firstNumber: firstNumber, secondNumber: secondNumber)
+        case .divide : result = DivideOperation().result(firstNumber: firstNumber, secondNumber: secondNumber)
+        }
+        
+        return result
+    }
+ }
 
-let plusResult = calculator.plusOperation()
-print("\(firstNumber) + \(secondNumber) = \(plusResult)")
+let addResult = Calculator(operation: .add, firstNumber: 7, secondNumber: 3).result()
+print("덧셈 결과 \(addResult)")
 
-let minusResult = calculator.minusOperation()
-print("\(firstNumber) / \(secondNumber) = \(minusResult)")
+let substractResult = Calculator(operation: .substract, firstNumber: 7, secondNumber: 3).result()
+print("뺄셈 결과 \(substractResult)")
 
-let multiplyResult = calculator.multiplyOperation()
-print("\(firstNumber) * \(secondNumber) = \(multiplyResult)")
+let multiplyResult = Calculator(operation: .multiply, firstNumber: 7, secondNumber: 3).result()
+print("곱셈 결과 \(multiplyResult)")
 
-let divideResult = calculator.dividedOperation()
-print("\(firstNumber) / \(secondNumber) = \(divideResult)")
+let divideResult = Calculator(operation: .divide, firstNumber: 7, secondNumber: 3).result()
+print("나눗셈 결과 \(divideResult)")
