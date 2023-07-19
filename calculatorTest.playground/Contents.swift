@@ -46,3 +46,21 @@ class Calculator {
         print(operation.result(firstNumber: firstNumber, secondNumber: secondNumber))
     }
  }
+
+
+let addOperation = AddOperation()
+let substractOperation = SubstractOperation()
+let multiplyOperation = MultiplyOperation()
+let divideOperation = DivideOperation()
+
+let calculator1 = Calculator(operation: addOperation)
+calculator1.showResult(firstNumber: 3, secondNumber: 7)
+
+let calculator2 = Calculator(operation: substractOperation)
+calculator2.showResult(firstNumber: 3, secondNumber: 7)
+
+let calculator3 = Calculator(operation: multiplyOperation)
+calculator3.showResult(firstNumber: 3, secondNumber: 7)
+
+let calculator4 = Calculator(operation: divideOperation)
+calculator4.showResult(firstNumber: 3, secondNumber: 7)
