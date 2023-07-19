@@ -39,7 +39,20 @@ class Calculator {
         self.firstNumber = firstNumber
         self.secondNumber = secondNumber
     }
-}
+    
+    func result() -> Double {
+        var result: Double = 0.0
+        
+        switch operation {
+        case .add : result = AddOperation().result(firstNumber: firstNumber, secondNumber: secondNumber)
+        case .substract : result = SubstractOperation().result(firstNumber: firstNumber, secondNumber: secondNumber)
+        case .multiply : result = MultiplyOperation().result(firstNumber: firstNumber, secondNumber: secondNumber)
+        case .divide : result = DivideOperation().result(firstNumber: firstNumber, secondNumber: secondNumber)
+        }
+        
+        return result
+    }
+ }
 
 //let plusResult = calculator.plusOperation()
 //print("\(firstNumber) + \(secondNumber) = \(plusResult)")
