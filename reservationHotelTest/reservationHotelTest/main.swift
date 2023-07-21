@@ -20,18 +20,11 @@ func selectMenuNumber() {
         print("잘 못 입력한 번호입니다")
         return
     }
-    
-    if let selectedMenuNumber = Int(selectMenuNumber) {
-        print("입력 번호는 \(selectMenuNumber)번 입니다")
 
-        switch selectedMenuNumber {
-        case 1: addRandomMoney()
-        case 2: showRoomInfomation()
-        default: print("에러 발생했습니다")
-        }
-        
-    } else {
-        print("숫자를 입력해 주세요")
+    switch Int(selectMenuNumber) {
+    case 1: addRandomMoney()
+    case 2: showRoomInfomation()
+    default: print("에러 발생했습니다")
     }
     
     resrvationHotelMain()
