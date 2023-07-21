@@ -101,7 +101,6 @@ func reserveHotel() {
     if reservationIsPossible {
         reservationNumber += 1
         reservationNumberList.append(reservationNumber)
-        
         reservationRoomNumberList[reservationNumber] = reserveRoomNumber
         reservationCheckInDateList[reservationNumber] = checkInDate
         reservationCheckOutDateList[reservationNumber] = checkOutDate
@@ -127,8 +126,27 @@ func reserveHotel() {
 
 func myReservationList() {
     print("나의 예약 목록입니다")
-//    사용자가 '4'를 선택하면 나의 예약 목록을 출력하세요. 예약된 방의 목록을 보여주고, 각 예약 정보를 출력하세요.
-
+    
+    if reservationNumberList.isEmpty {
+        print("예약한 방이 없습니다")
+    } else {
+        
+        print("예약은 \(reservationNumberList.count) 개 있습니다")
+        
+        for i in 0...reservationNumberList.count - 1 {
+            
+            let number = reservationNumberList[i]
+            
+            print("""
+                  예약 \(reservationNumberList[number - 1])번
+                  방 번호: \(String(describing: reservationRoomNumberList[number]))
+                  체크인 날짜: \(String(describing: reservationCheckInDateList[number]))
+                  체크아웃 날짜: \(String(describing: reservationCheckOutDateList[number]))
+                  """)
+        }
+    }
+    
+    resrvationHotelMain()
 }
 
 func myReservationListByDate(){
