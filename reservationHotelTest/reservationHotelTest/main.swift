@@ -22,7 +22,8 @@ func selectMenuNumber() {
     
     if (Int(selectMenuNumber) != nil) {
         print("입력 번호는 \(selectMenuNumber)번 입니다")
-        addRandomMoney()
+//        addRandomMoney()
+        showRoomInfomation()
     } else {
         print("숫자를 입력해 주세요")
     }
@@ -38,13 +39,23 @@ func addRandomMoney() {
         randomMoney = randomNumber * 10000
     }
     
-    let numberFormatter = NumberFormatter()
+    //세자리 수 끊기 추가 해보기
     
     print("""
           축하합니다! 당첨 금액은 \(randomMoney) 원입니다~
           현재 잔고 : \(balanceMoney)
           합계 : \(balanceMoney + randomMoney)
           """)
+}
+
+func showRoomInfomation() {
+    var roomInfomation: [String] = []
+    
+    //원래라면 등록된 데이터 출력하겠지만, 이번에는 그냥 1번방 1만원 .. 규칙이 있어서 for문 사용한 느낌으로..
+    for i in 1...5 {
+        roomInfomation.insert("\(i)번방 \(i)0,000원", at: i-1)
+    }
+    print(roomInfomation)
 }
 
 
