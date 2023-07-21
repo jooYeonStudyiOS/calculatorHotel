@@ -1,6 +1,13 @@
 import Foundation
 
-var balanceMoney: Int = .random(in: 1...10000000)
+var balanceMoney: Int = .random(in: 1...100000)
+var reservationNomber: Int = 0
+
+var reservationRoomNumberList: [Int : String] = [:]
+var reservationCheckInDateList: [Int : String] = [:]
+var reservationCheckOutDateList: [Int : String] = [:]
+
+let roomInformation: [Int : Int] = [1:10000, 2:20000, 3:30000, 4:40000, 5:50000]
 
 func showMenu() {
     print("""
@@ -34,8 +41,6 @@ func selectMenuNumber() {
     case 0: endRevervationHotel()
     default: print("에러 발생했습니다")
     }
-    
-    resrvationHotelMain()
 }
 
 func addRandomMoney() {
@@ -97,17 +102,23 @@ func reserveHotel() {
         reservationCheckInDateList[reservationNomber] = checkInDate
         reservationCheckOutDateList[reservationNomber] = checkOutDate
         
-        print("예약이 완료되었습니다")
+        //강제 언래핑을 두개나 써야하다니...방법 좀 생각해보자
+        let resultMoney = balanceMoney - (roomInformation[Int(reserveRoomNumber)!]!)
         
+        if resultMoney < 0 {
+            print("잔액 부족으로 예약이 불가능합니다.")
+        }else {
+            print("""
+                  예약이 완료되었습니다
+                  잔액은 \(resultMoney)원입니다.
+                  """)
+        }
+
     } else {
         print("죄송합니다. 예약이 불가능합니다.")
     }
     
     resrvationHotelMain()
-    
-    
-//    사용자로부터 호텔방 번호, 체크인 날짜, 체크아웃 날짜를 입력받아 예약을 완료하세요. 호텔 방 예약 가능시(가능 조건은 회의하여 결정) 금액을 차감하고, 가능하지 않을 시 오류 메시지를 출력하세요
-    
 }
 
 func myReservationList() {
