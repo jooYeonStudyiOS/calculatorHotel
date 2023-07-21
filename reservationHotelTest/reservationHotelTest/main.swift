@@ -51,25 +51,63 @@ func addRandomMoney() {
     //세자리 수 끊기 추가 해보기
     
     print("""
+          
           축하합니다! 당첨 금액은 \(randomMoney) 원입니다~
+          
           현재 잔고 : \(balanceMoney)
           합계 : \(balanceMoney + randomMoney)
+          
           """)
+    
+    resrvationHotelMain()
 }
 
 func showRoomInfomation() {
-    var roomInfomation: [String] = []
-    
-    //원래라면 등록된 데이터 출력하겠지만, 이번에는 그냥 1번방 1만원 .. 규칙이 있어서 for문 사용한 느낌으로..
-    for i in 1...5 {
-        roomInfomation.insert("\(i)번방 \(i)0,000원", at: i-1)
+
+    for (key, value) in roomInformation.sorted(by: { $0 < $1 }) {
+        
+        print("\(key)번방 \(value)원")
     }
     
-    print(roomInfomation)
+    resrvationHotelMain()
 }
 
 func reserveHotel() {
+    
+    let reservationIsPossible: Bool = .random()
+
     print("예약하실 방 번호를 입력하세요")
+    guard let reserveRoomNumber = readLine(), !reserveRoomNumber.isEmpty else {
+        return
+    }
+    
+    print("체크인 날짜를 입력하세요")
+    guard let checkInDate = readLine(), !checkInDate.isEmpty else {
+        return
+    }
+    
+    print("체크아웃 날짜를 입력하세요")
+    guard let checkOutDate = readLine(), !checkOutDate.isEmpty else {
+        return
+    }
+    
+    if reservationIsPossible {
+        reservationNomber += 1
+        reservationRoomNumberList[reservationNomber] = reserveRoomNumber
+        reservationCheckInDateList[reservationNomber] = checkInDate
+        reservationCheckOutDateList[reservationNomber] = checkOutDate
+        
+        print("예약이 완료되었습니다")
+        
+    } else {
+        print("죄송합니다. 예약이 불가능합니다.")
+    }
+    
+    resrvationHotelMain()
+    
+    
+//    사용자로부터 호텔방 번호, 체크인 날짜, 체크아웃 날짜를 입력받아 예약을 완료하세요. 호텔 방 예약 가능시(가능 조건은 회의하여 결정) 금액을 차감하고, 가능하지 않을 시 오류 메시지를 출력하세요
+    
 }
 
 func myReservationList() {
