@@ -47,8 +47,6 @@ func addRandomMoney() {
           현재 잔고 : \(balanceMoney)
           합계 : \(balanceMoney + randomMoney)
           """)
-    
-    resrvationHotelMain()
 }
 
 func showRoomInfomation() {
