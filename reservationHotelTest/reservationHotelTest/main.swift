@@ -3,6 +3,7 @@ import Foundation
 var balanceMoney: Int = .random(in: 1...100000)
 
 var reservationNumber: Int = 0
+var reservationNumberList: [Int] = []
 
 var reservationRoomNumberList: [Int : String] = [:]
 var reservationCheckInDateList: [Int : String] = [:]
@@ -99,6 +100,8 @@ func reserveHotel() {
     
     if reservationIsPossible {
         reservationNumber += 1
+        reservationNumberList.append(reservationNumber)
+        
         reservationRoomNumberList[reservationNumber] = reserveRoomNumber
         reservationCheckInDateList[reservationNumber] = checkInDate
         reservationCheckOutDateList[reservationNumber] = checkOutDate
