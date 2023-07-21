@@ -20,7 +20,22 @@ func selectMenuNumber() {
         return
     }
     
-    print("입력 번호는 \(selectMenuNumber)번 입니다")
+    if (Int(selectMenuNumber) != nil) {
+        print("입력 번호는 \(selectMenuNumber)번 입니다")
+        addRandomMoney()
+    } else {
+        print("숫자를 입력해 주세요")
+    }
+}
+
+func addRandomMoney() {
+    var randomMoney: Int = .random(in: 1...500000)
+    
+    print("""
+          축하합니다! 당첨 금액은 \(randomMoney) 원입니다~
+          현재 잔고 : \(balanceMoney)
+          합계 : \(balanceMoney + randomMoney)
+          """)
 }
 
 
