@@ -66,6 +66,8 @@ func addRandomMoney() {
           
           """)
     
+    balanceMoney += randomMoney
+    
     resrvationHotelMain()
 }
 
@@ -129,6 +131,7 @@ func reserveHotel() {
                   예약이 완료되었습니다
                   잔액은 \(resultMoney)원입니다.
                   """)
+            balanceMoney = resultMoney
         }
 
     } else {
