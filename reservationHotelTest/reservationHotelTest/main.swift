@@ -1,7 +1,8 @@
 import Foundation
 
 var balanceMoney: Int = .random(in: 1...100000)
-var reservationNomber: Int = 0
+
+var reservationNumber: Int = 0
 
 var reservationRoomNumberList: [Int : String] = [:]
 var reservationCheckInDateList: [Int : String] = [:]
@@ -97,10 +98,10 @@ func reserveHotel() {
     }
     
     if reservationIsPossible {
-        reservationNomber += 1
-        reservationRoomNumberList[reservationNomber] = reserveRoomNumber
-        reservationCheckInDateList[reservationNomber] = checkInDate
-        reservationCheckOutDateList[reservationNomber] = checkOutDate
+        reservationNumber += 1
+        reservationRoomNumberList[reservationNumber] = reserveRoomNumber
+        reservationCheckInDateList[reservationNumber] = checkInDate
+        reservationCheckOutDateList[reservationNumber] = checkOutDate
         
         //강제 언래핑을 두개나 써야하다니...방법 좀 생각해보자
         let resultMoney = balanceMoney - (roomInformation[Int(reserveRoomNumber)!]!)
@@ -123,6 +124,8 @@ func reserveHotel() {
 
 func myReservationList() {
     print("나의 예약 목록입니다")
+//    사용자가 '4'를 선택하면 나의 예약 목록을 출력하세요. 예약된 방의 목록을 보여주고, 각 예약 정보를 출력하세요.
+
 }
 
 func myReservationListByDate(){
@@ -132,7 +135,6 @@ func myReservationListByDate(){
 func endRevervationHotel() {
     print("프로그램을 종료합니다")
 }
-
 
 func resrvationHotelMain() {
     showMenu()
