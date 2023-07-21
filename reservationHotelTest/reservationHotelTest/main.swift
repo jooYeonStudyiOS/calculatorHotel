@@ -6,8 +6,8 @@ var reservationNumber: Int = 0
 var reservationNumberList: [Int] = []
 
 var reservationRoomNumberList: [Int : String] = [:]
-var reservationCheckInDateList: [Int : String] = [:]
-var reservationCheckOutDateList: [Int : String] = [:]
+var reservationCheckInDateList: [Int : Date] = [:]
+var reservationCheckOutDateList: [Int : Date] = [:]
 
 let roomInformation: [Int : Int] = [1:10000, 2:20000, 3:30000, 4:40000, 5:50000]
 
@@ -81,20 +81,34 @@ func showRoomInfomation() {
 
 func reserveHotel() {
     
-    let reservationIsPossible: Bool = .random()
+    //목록이랑 관련 있는 동안에만
+    let reservationIsPossible: Bool = true
 
     print("예약하실 방 번호를 입력하세요")
     guard let reserveRoomNumber = readLine(), !reserveRoomNumber.isEmpty else {
         return
     }
     
-    print("체크인 날짜를 입력하세요")
+    print("체크인 날짜를 입력하세요 \n 2023년/07/21 형식")
     guard let checkInDate = readLine(), !checkInDate.isEmpty else {
         return
     }
+
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy/MM/dd"
+
+    guard let checkInDateFormatter = formatter.date(from: checkInDate) else {
+        print("형식 오류입니다")
+        return
+    }
     
-    print("체크아웃 날짜를 입력하세요")
+    print("체크아웃 날짜를 입력하세요 \n 2023/07/21 형식")
     guard let checkOutDate = readLine(), !checkOutDate.isEmpty else {
+        return
+    }
+    
+    guard let checkOutDateFormatter = formatter.date(from: checkOutDate) else {
+        print("형식 오류입니다")
         return
     }
     
@@ -102,8 +116,8 @@ func reserveHotel() {
         reservationNumber += 1
         reservationNumberList.append(reservationNumber)
         reservationRoomNumberList[reservationNumber] = reserveRoomNumber
-        reservationCheckInDateList[reservationNumber] = checkInDate
-        reservationCheckOutDateList[reservationNumber] = checkOutDate
+        reservationCheckInDateList[reservationNumber] = checkInDateFormatter
+        reservationCheckOutDateList[reservationNumber] = checkOutDateFormatter
         
         //강제 언래핑을 두개나 써야하다니...방법 좀 생각해보자
         let resultMoney = balanceMoney - (roomInformation[Int(reserveRoomNumber)!]!)
@@ -151,6 +165,10 @@ func myReservationList() {
 
 func myReservationListByDate(){
     print("체크인 날짜 순입니다")
+    
+    for (_, value) in reservationCheckInDateList.sorted(by: {$0.1 < $1.1}) {
+        print("\(value)")
+    }
 }
 
 func endRevervationHotel() {
