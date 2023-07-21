@@ -10,6 +10,10 @@ func showMenu() {
           <메뉴>
           1. 이벤트 머니 지급!
           2. 방 정보 확인하기
+          3. 예약하기
+          4. 예약 목록
+          5. 체크인 순으로 보기
+          0. 프로그램 종료하기
           
           메뉴를 선택해 주세요
           """)
@@ -24,6 +28,10 @@ func selectMenuNumber() {
     switch Int(selectMenuNumber) {
     case 1: addRandomMoney()
     case 2: showRoomInfomation()
+    case 3: reserveHotel()
+    case 4: myReservationList()
+    case 5: myReservationListByDate()
+    case 0: endRevervationHotel()
     default: print("에러 발생했습니다")
     }
     
@@ -56,7 +64,24 @@ func showRoomInfomation() {
     for i in 1...5 {
         roomInfomation.insert("\(i)번방 \(i)0,000원", at: i-1)
     }
+    
     print(roomInfomation)
+}
+
+func reserveHotel() {
+    print("예약하실 방 번호를 입력하세요")
+}
+
+func myReservationList() {
+    print("나의 예약 목록입니다")
+}
+
+func myReservationListByDate(){
+    print("체크인 날짜 순입니다")
+}
+
+func endRevervationHotel() {
+    print("프로그램을 종료합니다")
 }
 
 
