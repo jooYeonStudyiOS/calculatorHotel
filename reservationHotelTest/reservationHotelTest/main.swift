@@ -29,7 +29,16 @@ func selectMenuNumber() {
 }
 
 func addRandomMoney() {
-    var randomMoney: Int = .random(in: 1...500000)
+    let randomNumber: Int = .random(in: 1...50)
+    var randomMoney: Int = 0
+    
+    if randomNumber < 10 {
+        randomMoney = randomNumber * 100000
+    } else if randomNumber >= 10 {
+        randomMoney = randomNumber * 10000
+    }
+    
+    let numberFormatter = NumberFormatter()
     
     print("""
           축하합니다! 당첨 금액은 \(randomMoney) 원입니다~
@@ -37,7 +46,6 @@ func addRandomMoney() {
           합계 : \(balanceMoney + randomMoney)
           """)
 }
-
 
 
 func resrvationHotelMain() {
