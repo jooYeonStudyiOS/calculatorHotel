@@ -4,6 +4,7 @@ var balanceMoney: Int = .random(in: 1...10000000)
 
 func showMenu() {
     print("""
+          ====================
           스위프트 호텔에 어서 오세용!
           
           <메뉴>
@@ -20,13 +21,20 @@ func selectMenuNumber() {
         return
     }
     
-    if (Int(selectMenuNumber) != nil) {
+    if let selectedMenuNumber = Int(selectMenuNumber) {
         print("입력 번호는 \(selectMenuNumber)번 입니다")
-//        addRandomMoney()
-        showRoomInfomation()
+
+        switch selectedMenuNumber {
+        case 1: addRandomMoney()
+        case 2: showRoomInfomation()
+        default: print("에러 발생했습니다")
+        }
+        
     } else {
         print("숫자를 입력해 주세요")
     }
+    
+    resrvationHotelMain()
 }
 
 func addRandomMoney() {
@@ -46,6 +54,8 @@ func addRandomMoney() {
           현재 잔고 : \(balanceMoney)
           합계 : \(balanceMoney + randomMoney)
           """)
+    
+    resrvationHotelMain()
 }
 
 func showRoomInfomation() {
