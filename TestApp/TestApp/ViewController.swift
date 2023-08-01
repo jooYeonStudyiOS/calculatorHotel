@@ -1,89 +1,112 @@
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDataSource, UITableViewDelegate {
 
+    var scrollView: UIScrollView!
+    var imageView: UIImageView!
+    
+    let pickerView = UIPickerView()
+    
+    var tabelView: UITableView!
+    
+    let data = ["옵션1", "옵선2", "옵션3"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //UILabel
-        let label = UILabel(frame: CGRect(x: 100, y: 100, width: 300, height: 50))
+        //스크롤뷰 생성
+        scrollView = UIScrollView(frame: CGRect(origin: CGPoint(x: 0, y: 300), size: CGSize(width: view.bounds.width, height: 300)))
+        scrollView.delegate = self
         
-        label.textColor = .blue
-        label.text = "안녕하세요"
-        label.font = .systemFont(ofSize: 20)
-        label.textAlignment = .center
-        
-        //뷰에 추가 반드시 할 것!
-        view.addSubview(label)
-        
-        //UIImageView
-        let imageView = UIImageView(frame: CGRect(x: 150, y: 150, width: 100, height: 100))
-        
-        //이미지뷰에 넣어줄 이미지를 생성
+        //이미지 생성
         let image = UIImage(systemName: "folder.fill")
         
-        //이미지뷰에 이미지를 넣어줌
-        imageView.image = image
-        
-        //넣을 때 어떻게 넣을지 설정
+        //이미지를 넣고 이미지뷰 생성
+        imageView = UIImageView(image: image)
+        imageView.backgroundColor = .red
         imageView.contentMode = .scaleAspectFit
+        imageView.frame = CGRect(origin: .zero, size: CGSize(width: 100, height: 100))
         
-        view.addSubview(imageView)
+        //스크롤뷰에 이미지뷰를 추가
+        scrollView.addSubview(imageView)
         
-        //UITextField
-        let textField = UITextField(frame: CGRect(x: 200, y: 200, width: 100, height: 100))
-        textField.placeholder = "입력하십시오~~"
+        //스크롤뷰의 사이즈를 설정
+        //스크롤뷰 사이즈 < 컨텐트사이즈 조건에서 스크롤 가능
+        scrollView.contentSize = CGSize(width: view.bounds.width*2, height: 300*2)
         
-        view.addSubview(textField)
+        //스크롤 줌인, 줌아웃
+        scrollView.minimumZoomScale = 0.5
+        scrollView.maximumZoomScale = 2.0
         
-        //UIButton
-        let button = UIButton(frame: CGRect(x: 200, y: 300, width: 150, height: 150))
-        button.setTitle("버튼", for: .normal)
-        button.backgroundColor = .gray
-        
-        //버튼에 이벤트가 들어왔을 때 실행될 액션 설정 가능
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        
-        view.addSubview(button)
+        //루트뷰에 스크롤뷰를 추가
+        view.addSubview(scrollView)
         
         
-        //UISwitch
-        let switchButton = UISwitch(frame: CGRect(x: 200, y: 600, width: 50, height: 50))
-        switchButton.isOn = true
-        switchButton.onTintColor = .purple
-        switchButton.thumbTintColor = .cyan
-        switchButton.addTarget(self, action: #selector(buttonAction), for: .valueChanged)
+        //picker뷰
+        pickerView.frame = CGRect(x: 200, y: 300, width: 200, height: 200)
         
-        view.addSubview(switchButton)
+        //UIPickerViewDataSource, UIPickerViewDelegate 를 상속받아줘야 사용 가능
+        pickerView.dataSource = self
+        pickerView.delegate = self
         
-        slider.addTarget(self, action: #selector(buttonAction), for: .valueChanged)
+        view.addSubview(pickerView)
         
-        view.addSubview(slider)
         
-        //UISegmentedControl
-        let segmentedControl = UISegmentedControl(items: ["옵션1", "옵션2", "옵션3"])
-        segmentedControl.frame = CGRect(x: 250, y: 550, width: 150, height: 150)
-        segmentedControl.selectedSegmentIndex = 0
-        segmentedControl.addTarget(self, action: #selector(buttonAction), for: .valueChanged)
+        //tableView
+        tabelView = UITableView(frame: view.bounds, style: .plain)
+        tabelView.delegate = self
+        tabelView.dataSource = self
         
-        view.addSubview(segmentedControl)
-
+        view.addSubview(tabelView)
+        
     }
     
-    //UISlider
-    let slider = UISlider(frame: CGRect(x: 150, y: 750, width: 150, height: 150))
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageView
+    }
 
     
+    //UIPickerViewDataSource, UIPickerViewDelegate 를 상속받으면 당연히 사용해야 하는 함수
+    //프로토콜은 필수항목 이란 느낌이기 때문에, 반드시 구현해줘야 하는 것들이 있다!
     
+    //pickView의 열의 갯수를 정해주는 함수
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return data.count
+    }
     
-    @objc func buttonAction() {
-        view.backgroundColor = .black
-        print("슬라이더값 \(slider.value)")
+    //1열에서 몇 개의 행을 보여줄지 정해주는 함수
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    //각 행에서 보여줄 타이틀
+    //이 함수를 구현하지 않으면 ? 라고만 출력된다
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return data[row]
+    }
+    
+    //각 행을 선택했을 때 어떤 액션을 할지 정해주는 함수
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let selectedValue = data[row]
+        print("픽커뷰 \(selectedValue)")
     }
     
     
-
-
+    //각각의 섹션에 대해 행이 몇 개 들어가는지 설정
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
+    
+    //각각의 행에는 cell이라는 기본틀이 존재하고, 그 기본틀을 정의해주는 함수
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
+        cell.textLabel?.text = data[indexPath.row]
+        return cell
+    }
+    
+    //선택되었을 때 어떤 액션을 할지 정해주는 함수
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("테이블 뷰 \(data[indexPath.row])")
+    }
 }
 
